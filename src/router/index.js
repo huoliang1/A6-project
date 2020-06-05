@@ -10,5 +10,4 @@ Vue.use(VueRouter)
 export default new VueRouter({
       mode:'history', //不带#
       routes
-
 })

@@ -27,6 +27,8 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.0",
     "eslint-plugin-vue": "^6.2.2",
+    "less": "^3.11.2",
+    "less-loader": "^6.1.0",
     "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {
@@ -41,9 +43,7 @@
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {
-      
-    }
+    "rules": {}
   },
   "browserslist": [
     "> 1%",
