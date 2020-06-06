@@ -68,9 +68,10 @@ export default {
                 location.query ={keyword2:keyword.toUpperCase()}
             }
             // 使用vue router3.1.0的语法(内部不会抛出错误的promise)
-          this.$router.push(location).catch(()=>{
-              // console.log('出错啦');
-          })
+          // this.$router.push(location).catch(()=>{
+          //     // console.log('出错啦');
+          // })
+          this.$router.push(location)
         }
       },
 }
