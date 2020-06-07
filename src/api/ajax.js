@@ -14,13 +14,13 @@ const instace = axios.create({
         timeout:15000     //请求超时时间
 })
 // 注册请求拦截器
-axios.interceptors.request.use(config =>{
+instace.interceptors.request.use(config =>{
       // 显示请求进度条
       NProgress.start()
         return config
 })
 // 注册响应拦截器
-axios.interceptors.response.use(
+instace.interceptors.response.use(
       response =>{  //请求成功的回调
         // 隐藏进度条  无论是成功还是失败
         NProgress.done()
