@@ -15,18 +15,18 @@
                 </nav>
                 <div class="sort">
                     <div class="all-sort-list2">
-                        <div class="item" v-for="(c1, index) in categoryList" :key="c1.categoryId">
+                        <div class="item" v-for="c1 in categoryList" :key="c1.categoryId">
                             <h3>
                                 <a href="javascript:;">{{c1.categoryName}}</a>
                             </h3>
                             <div class="item-list clearfix">
                                 <div class="subitem">
-                                    <dl class="fore" v-for="(c2, index) in c1.categoryChild" :key="c2.categoryId">
+                                    <dl class="fore" v-for="c2 in c1.categoryChild" :key="c2.categoryId">
                                         <dt>
                                             <a href="javascript:;">{{c2.categoryName}}</a>
                                         </dt>
                                         <dd>
-                                            <em v-for="(c3, index) in c2.categoryChild" :key="c3.categoryId">
+                                            <em v-for="c3 in c2.categoryChild" :key="c3.categoryId">
                                                 <a href="javascript:;">{{c3.categoryName}}</a>
                                             </em>
 
