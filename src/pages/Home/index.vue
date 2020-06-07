@@ -4,18 +4,35 @@
   <TypeNav />
   <!-- 列表 -->
  <ListContainer />
-
-
+  <!-- 今日推荐 -->
+  <TodayRecommend />
+    <!-- 商品排行 -->
+  <Rank/>
+  <Like />
+  <Floor />
+  <Brand />
 </div>
 </template>
 
 <script type="text/ecmascript-6">
 import ListContainer from './ListContainer'
+import TodayRecommend from './TodayRecommend'
+import Rank from './Rank'
+import Like from './Like/Like'
+import Floor from './Floor/Floor'
+import Brand from './Brand/Brand'
+
+
 export default {
       name:'Home',
 
       components:{
-          ListContainer
+          ListContainer,
+          TodayRecommend,
+          Rank,
+          Like,
+          Floor,
+          Brand
       }
 }
 </script>
