@@ -6,6 +6,7 @@
 */
 
 import ajax from './ajax'
+import mockAjax from './mockAjax'
 
 /*
   登录
@@ -28,3 +29,10 @@ export function reqLogin (mobile, password){
   /api/product/getBaseCategoryList
 */
 export const reqCategoryList = () => ajax('/product/getBaseCategoryList')
+
+
+/*
+定义访问mock接口请求函数
+*/
+export const reqBanners = () =>mockAjax('/banners')
+export const reqFloors = () =>mockAjax('/floors')

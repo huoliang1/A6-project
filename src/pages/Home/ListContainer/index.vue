@@ -9,7 +9,7 @@
             <div class="swiper-slide">
               <img src="./images/banner1.jpg" />
             </div>
-            <!-- <div class="swiper-slide">
+            <div class="swiper-slide">
               <img src="./images/banner2.jpg" />
             </div>
             <div class="swiper-slide">
@@ -17,7 +17,7 @@
             </div>
             <div class="swiper-slide">
               <img src="./images/banner4.jpg" />
-            </div> -->
+            </div>
           </div>
           <!-- 如果需要分页器 -->
           <div class="swiper-pagination"></div>
@@ -26,6 +26,13 @@
           <div class="swiper-button-prev"></div>
           <div class="swiper-button-next"></div>
         </div>
+
+
+
+
+
+
+
       </div>
       <div class="right">
         <div class="news">
@@ -111,8 +118,34 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import Swiper from 'swiper'
+  import 'swiper/css/swiper.min.css'
+
+
   export default {
     name: 'ListContainer',
+
+
+    // 初始化显示界面后立即执行
+    mounted() {
+        // 创建swiper 实例对象:必须在列表数据显示之后才能创建才能有正常轮播效果
+        new Swiper ('.swiper-container', {
+          // direction: 'horizontal', // 水平切换选项   默认可以不写
+          loop: true, // 循环模式选项
+
+          // 如果需要分页器
+          pagination: {
+            el: '.swiper-pagination',
+          },
+
+          // 如果需要前进后退按钮
+          navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+          },
+
+        })
+    },
   }
 
 </script>

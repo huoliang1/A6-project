@@ -26,6 +26,15 @@ import Brand from './Brand/Brand'
 export default {
       name:'Home',
 
+      mounted() {
+        // 分发给异步action请求获取楼层列表数据
+        this.$store.dispatch('getFloors')
+      },
+
+
+
+
+
       components:{
           ListContainer,
           TodayRecommend,
