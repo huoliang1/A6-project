@@ -69,13 +69,8 @@ export default {
 
               // 如果当前路由已经有参数
               // 有什么带什么
+              // const {query} =this.$route
               location.query = this.$route.query
-
-
-
-
-
-
 
 
             // 使用vue router3.1.0的语法(内部不会抛出错误的promise)

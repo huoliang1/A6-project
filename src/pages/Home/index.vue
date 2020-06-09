@@ -9,12 +9,14 @@
     <!-- 商品排行 -->
   <Rank/>
   <Like />
-  <Floor />
+  <Floor v-for="floor in floors" :key="floor.id" :floor="floor"/>
+
   <Brand />
 </div>
 </template>
 
 <script type="text/ecmascript-6">
+import {mapState} from 'vuex'
 import ListContainer from './ListContainer'
 import TodayRecommend from './TodayRecommend'
 import Rank from './Rank'
@@ -26,13 +28,28 @@ import Brand from './Brand/Brand'
 export default {
       name:'Home',
 
+
+    computed: {
+      ...mapState({
+        floors:state => state.home.floors
+      })
+    },
+
+
+
+
+
+
+
+
+
+
+
       mounted() {
         // 分发给异步action请求获取楼层列表数据
         this.$store.dispatch('getFloors')
+        this.$store.dispatch('getBanners')
       },
-
-
-
 
 
       components:{
@@ -40,6 +57,7 @@ export default {
           TodayRecommend,
           Rank,
           Like,
+          Floor,
           Floor,
           Brand
       }

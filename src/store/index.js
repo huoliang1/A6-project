@@ -4,9 +4,10 @@
 
 import Vue from 'vue'
 import Vuex from 'vuex'
-import home from './modules/home'
-import user from './modules/user'
-
+// import home from './modules/home'
+// import user from './modules/user'
+// import search from './modules/search'
+import modules from './modules'
 Vue.use(Vuex)
 
 const mutations = {
@@ -25,8 +26,7 @@ export default new Vuex.Store({
   mutations,
   actions,
   getters,
-  modules: {   //指定vuex管理所有子模块
-      home,  //表示名称:vuex 子模块
-      user
-  }
+  modules   //指定vuex管理所有子模块
+
+
 })

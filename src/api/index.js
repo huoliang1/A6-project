@@ -36,3 +36,11 @@ export const reqCategoryList = () => ajax('/product/getBaseCategoryList')
 */
 export const reqBanners = () =>mockAjax('/banners')
 export const reqFloors = () =>mockAjax('/floors')
+
+
+/*
+获取商品列表
+/api/list/   POST
+options: 包含所有需要传递的搜索请求参数对象
+*/
+export const reqProductList =(options)=> ajax.post('/list',options)

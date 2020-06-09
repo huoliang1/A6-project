@@ -23,7 +23,7 @@ export default {
           接收保存楼层列表数据
         */
        RECEIVE_FLOORS(state,floors){
-        state.floors = floors
+          state.floors = floors
        },
 
 
