@@ -50,6 +50,13 @@ export default {
           keyword:'',
         }
       },
+
+           mounted() {
+        // 在header中:通过事件总线对象绑定自定义事件监听，在回调中控删除输入数据
+            this.$bus.$on('removeKeyword',() => {
+              this.keyword =''
+            })
+        },
       methods: {
         search(){
           const {keyword} = this
@@ -77,7 +84,15 @@ export default {
           // this.$router.push(location).catch(()=>{
           //     // console.log('出错啦');
           // })
-          this.$router.push(location)
+
+          // 如果当前没有在search,用push ,否则用replace
+          // if(this.$route.name!== 'search'){
+            if(this.$route.path.indexOf('/search')!== 0){  //可能是search/xxx
+               this.$router.push(location)
+          }else{
+              this.$router.replace(location)
+          }
+
         }
       },
 }

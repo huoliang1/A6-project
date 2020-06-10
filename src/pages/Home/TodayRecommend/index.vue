@@ -27,8 +27,16 @@
 </template>
 
 <script type="text/ecmascript-6">
+import { mapState } from 'vuex'
   export default {
-    name: 'TodayRecommend'
+    name: 'TodayRecommend',
+
+
+    computed: {
+      ...mapState({
+        recommends:state => state.home.recommends
+      })
+    },
   }
 
 </script>
