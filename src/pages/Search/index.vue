@@ -134,7 +134,7 @@ export default {
         trademark: "", // 品牌: "ID:品牌名称" "1:苹果"
         order: "1:desc", // 排序方式  1: 综合,2: 价格 asc: 升序,desc: 降序  "1:desc"
         pageNo: 1, // 页码
-        pageSize: 5 //	每页数量
+        pageSize: 2 //	每页数量
       }
     };
   },
