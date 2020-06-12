@@ -57,7 +57,7 @@
     mounted() {
       // 如果初始时已经有数据了，就创建一个对应的swiper对象
       if(this.carouseList.length > 0){   //已经显示了
-        console.log('+++',this.carouseList.length);
+        // console.log('+++',this.carouseList.length);
         this.initSwiper()  //就立即创建swiper，不需要什么nextTick()或者定时器
       }
 

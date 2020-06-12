@@ -44,3 +44,8 @@ export const reqRecommends = () =>mockAjax('/recommends')
 options: 包含所有需要传递的搜索请求参数对象
 */
 export const reqProductList =(options)=> ajax.post('/list',options)
+
+/*
+  获取商品详情信息
+*/
+export const reqDetailInfo = (skuId) => ajax.get(`/item/${skuId}`)
