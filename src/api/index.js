@@ -49,3 +49,37 @@ export const reqProductList =(options)=> ajax.post('/list',options)
   获取商品详情信息
 */
 export const reqDetailInfo = (skuId) => ajax.get(`/item/${skuId}`)
+
+
+
+/*
+6.获取购物车列表
+  /api/cart/cartList    GET
+*/
+export const reqShopCart = () => ajax.get('/cart/cartList')
+
+/*
+7.添加到购物车(对已有物品进行数量改动)
+skuId: 商品ID
+skuNum: 商品数量, 正数代表增加, 负数代表减少
+/api/cart/addToCart/{ skuId }/{ skuNum } POST
+*/
+export const reqaddToCart = (skuId,skuNum) => ajax.post(`/cart/addToCart/${skuId}/${skuNum}`)
+
+/*
+8.切换商品选中状态
+skuId:商品的id
+ischecked：商品选中状态
+'0'代表取消选中
+'1'代表选中
+/api/cart/checkCart/{skuID}/{isChecked}   GET
+*/
+
+export const reqCheckCartItem = (skuId,isChecked) =>ajax.get(`/cart/checkCart/${skuId}/${isChecked}`)
+
+
+/*
+删除购物车购物商品
+/api/cart/deleteCart/{skuId}
+*/
+export const reqDeleteCartItem = (skuId)=>ajax.delete(`/cart/deleteCart/${skuId}`)

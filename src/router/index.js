@@ -37,5 +37,10 @@ VueRouter.prototype.replace = function(location,onComolete,onAbort){
 // 向外暴露路由对象
 export default new VueRouter({
       mode:'history', //不带#
-      routes
+      routes,
+
+      //路由跳转后 滚动条停留在最上面(0,0)
+      scrollBehavior (to, from, savedPosition) {
+        return { x: 0, y: 0 }
+      }
 })
