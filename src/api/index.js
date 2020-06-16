@@ -1,28 +1,11 @@
 /*
   包含项目中的所有接口的ajax请求
   函数的返回值是promise,函数内部调用ajax模块发请求
-
   需要根据接口文档，定义接口请求函数
 */
 
 import ajax from './ajax'
 import mockAjax from './mockAjax'
-
-/*
-  登录
-  /api/user/passport/login
-*/
-export function reqLogin (mobile, password){
-      // 将ajax作为函数去使用
-      // return ajax({
-      //     url:'/user/passport/login',
-      //     method:'POST',
-      //     data:{mobile,password}
-      // })
-
-      // 将ajax作为对象使用
-    return ajax.post('/user/passport/login',{mobile,password})
-}
 
 /*
   首页三级分类
@@ -65,7 +48,6 @@ skuNum: 商品数量, 正数代表增加, 负数代表减少
 /api/cart/addToCart/{ skuId }/{ skuNum } POST
 */
 export const reqaddToCart = (skuId,skuNum) => ajax.post(`/cart/addToCart/${skuId}/${skuNum}`)
-
 /*
 8.切换商品选中状态
 skuId:商品的id
@@ -74,12 +56,47 @@ ischecked：商品选中状态
 '1'代表选中
 /api/cart/checkCart/{skuID}/{isChecked}   GET
 */
-
 export const reqCheckCartItem = (skuId,isChecked) =>ajax.get(`/cart/checkCart/${skuId}/${isChecked}`)
-
 
 /*
 删除购物车购物商品
 /api/cart/deleteCart/{skuId}
 */
 export const reqDeleteCartItem = (skuId)=>ajax.delete(`/cart/deleteCart/${skuId}`)
+
+
+/*
+  登录
+  /api/user/passport/login
+*/
+export function reqLogin (mobile, password){
+  // 将ajax作为函数去使用
+  // return ajax({
+  //     url:'/user/passport/login',
+  //     method:'POST',
+  //     data:{mobile,password}
+  // })
+
+  // 将ajax作为对象使用
+return ajax.post('/user/passport/login',{mobile,password})
+}
+
+
+/*
+  注册用户
+  /api/user/passport/register
+  userInfo:包含以下属性
+  mobile,
+  password,
+  code，
+*/
+export const reqRegister = (userInfo) => ajax.post('/user/passport/register',userInfo)
+
+
+/*
+  退出登录
+  /api/user/passport/logout
+  GET
+*/
+
+export const reqLogout = () =>ajax('/user/passport/logout')

@@ -8,6 +8,7 @@
 
 import axios from 'axios'
 import  NProgress from 'nprogress'
+import store from '@/store'
  //  配置通用的基础路径和超时
 const instace = axios.create({
         baseURL:'/api',  //基础path
@@ -17,7 +18,9 @@ const instace = axios.create({
 instace.interceptors.request.use(config =>{
       // 显示请求进度条
       NProgress.start()
-        return config
+    // 5.每个请求自动携带userTempId的请求头:在请求拦截器中实现
+    config.headers['userTempId'] = store.state.user.userTempId
+    return config
 })
 // 注册响应拦截器
 instace.interceptors.response.use(
