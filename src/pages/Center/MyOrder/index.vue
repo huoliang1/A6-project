@@ -93,7 +93,7 @@
         }
       },
 
-    async  mounted() {
+      mounted() {
 
       //  异步获取第一页显示
         this.getOrders(1)
