@@ -4,6 +4,8 @@
    2.显示请求的进度条
    3.成功返回的数据不再是 response，而是直接向相应体数据response.data
    4.统一处理请求错误，具体请求也可以选择处理，或者不处理
+   5.每个请求自动携带userTempId的请求头:在请求拦截器中实现
+   6.登录后每个请求自动携带token的请求头:在请求拦截器中实现
 */
 
 import axios from 'axios'
@@ -20,7 +22,16 @@ instace.interceptors.request.use(config =>{
       NProgress.start()
     // 5.每个请求自动携带userTempId的请求头:在请求拦截器中实现
     config.headers['userTempId'] = store.state.user.userTempId
-    return config
+
+    /*
+     6.登录后每个请求自动携带token的请求头:在请求拦截器中实现
+    */
+      const token = store.state.user.userInfo.token
+      if(token){
+        config.headers['token'] = token
+      }
+
+      return config
 })
 // 注册响应拦截器
 instace.interceptors.response.use(

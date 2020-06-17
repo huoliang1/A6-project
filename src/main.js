@@ -6,12 +6,19 @@ import TypeNav from './components/TypeNav'
 import Carousel from './components/Carousel'
 import Pagination from './components/pagination'
 
-import '@/mock/mockServer'  //引入加载
+// 引入api模块所有分别暴露的函数,封装到API对象中
+import * as API from '@/api'
 
+import '@/mock/mockServer'  //引入加载
+import './validate'
 // 注册全局组件 (所有组件都能使用)
 Vue.component('TypeNav',TypeNav)
 Vue.component('Carousel',Carousel)
 Vue.component('Pagination',Pagination)
+
+// 将API 对象保存到Vue 的原型对象上 ===> 让所有的组件都直接可见(不在引入API)
+Vue.prototype.$API = API
+
 
 Vue.config.productionTip = false
 

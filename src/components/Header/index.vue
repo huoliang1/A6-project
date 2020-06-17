@@ -16,7 +16,7 @@
                         </p>
                     </div>
                     <div class="typeList">
-                          <a href="###">我的订单</a>
+                      <router-link to="/center">我的订单</router-link>
                           <router-link to="/shopcart">我的购物车</router-link>
                           <a href="###">我的尚品汇</a>
                           <a href="###">尚品汇会员</a>
@@ -73,14 +73,13 @@ export default {
       methods: {
 
 
-                    /*
+             /*
               退出登陆
               */
               logout () {
                 if (confirm('确定退出吗?')) {
                   this.$store.dispatch('logout').then(() => {
-                    // this.$router.push('/login')
-                    console.log(1);
+                    this.$router.push('/login')
 
                   }).catch(error => {
                     alert(error.message)

@@ -19,14 +19,16 @@
 
               <div class="input-text clearFix">
                 <i></i>
-                <input type="text" placeholder="手机号" v-model="mobile">
-                <!-- <span class="error-msg">错误提示信息</span> -->
+                <input name="phone" type="text" placeholder="手机号" v-model="mobile"
+                  v-validate="{required: true,regex: /^1\d{10}$/}" :class="{invalid: errors.has('phone')}">
+                <span class="error-msg">{{errors.first('phone')}}</span>
               </div>
 
               <div class="input-text clearFix">
                 <i class="pwd"></i>
-                <input type="password" placeholder="请输入密码" v-model="password">
-                <!-- <span class="error-msg">错误提示信息</span> -->
+                <input type="password" placeholder="请输入密码" v-model="password" name="密码"
+                  v-validate="{required: true, min: 6, max: 10}" :class="{invalid: errors.has('密码')}">
+                <span class="error-msg">{{ errors.first('密码') }}</span>
               </div>
 
               <div class="setting clearFix">
@@ -72,38 +74,60 @@
 </template>
 
 <script type="text/ecmascript-6">
-
   export default {
-      name:"Login",
+    name: "Login",
 
 
-      data() {
-        return {
-          mobile:'',
-          password:''
-        }
-      },
+    data() {
+      return {
+        mobile: '',
+        password: ''
+      }
+    },
 
-      methods: {
-       async login(){
-          // 取出收集 的数据
-          const {mobile,password} = this
-          // 对数据进行前台表单验证  若果不通过  提示  并结束
-        try{
-          //分发注册的异步action
-          await this.$store.dispatch('login',{mobile,password})
-          // 成功跳首页
-          this.$router.replace('/')
-        }catch(error){
+    methods: {
+      async login() {
+        // 取出收集 的数据
+        const {
+          mobile,
+          password
+        } = this
+        // 对数据进行前台表单验证  若果不通过  提示  并结束
+        const success = await this.$validator.validateAll() // 对所有表单项进行验证
+        if (success) {
+          try {
+            //分发注册的异步action
+            await this.$store.dispatch('login', {
+              mobile,
+              password
+            })
+            // 成功跳首页
+            this.$router.replace('/')
+          } catch (error) {
             //失败提示
             alert(error.message)
-        }
-
-
+          }
 
         }
+      }
+    },
+
+    /*
+    在进入当前组件前调用(此时组件还没有调用)
+    */
+      beforeRouteEnter (to, from, next) {
+            next(vm => {  //vm 就是当前组件对象，此回调函数在组件对象创建后调用，且传入的是组件对象
+              // 通过 `vm` 访问组件实例
+               //如果已经登录,强制跳转到首页
+              const token = vm.$store.state.user.userInfo.token
+              if(token){
+                next('/')
+              }else{  //如果没有登录就放行
+                next()
+              }
+            })
+
       },
-
   }
 
 </script>
@@ -204,9 +228,12 @@
                 line-height: 22px;
                 padding-right: 8px;
                 padding-left: 8px;
-
                 border-radius: 0 2px 2px 0;
                 outline: none;
+
+                &.invalid {
+                  border: 1px solid red;
+                }
               }
 
               .error-msg {
