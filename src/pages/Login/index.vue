@@ -88,21 +88,23 @@
     methods: {
       async login() {
         // 取出收集 的数据
-        const {
-          mobile,
-          password
-        } = this
+        const { mobile,password} = this
         // 对数据进行前台表单验证  若果不通过  提示  并结束
         const success = await this.$validator.validateAll() // 对所有表单项进行验证
         if (success) {
           try {
             //分发注册的异步action
-            await this.$store.dispatch('login', {
-              mobile,
-              password
-            })
+            await this.$store.dispatch('login', {mobile,password})
+            // 如果成功了
+            // 如果没有登录,强制跳转到login界面 ，携带上目标路径的redirect query参数
+           const redirect = this.$route.query.redirect
+           if(redirect){
+              this.$router.replace(redirect)
+           }else{
             // 成功跳首页
             this.$router.replace('/')
+           }
+
           } catch (error) {
             //失败提示
             alert(error.message)

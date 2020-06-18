@@ -69,14 +69,30 @@
       </table>
 
     </div>
-          <Pagination
+          <!-- <Pagination
            :currentPage="page"
            :pageSize="limit"
            :total="total"
            :showPageNo="5"
            @currentChange="getOrders"
+          /> -->
 
-          />
+
+          <el-pagination
+          background
+          layout="prev, pager, next, ->, total"
+          prev-text="上一页"
+          next-text="下一页"
+          :total="total"
+          :page-size="limit"
+          :current-page="page"
+          :pager-count="9"
+          @current-change="getOrders"
+
+          >
+
+          </el-pagination>
+
   </div>
 </template>
 
@@ -96,7 +112,7 @@
       mounted() {
 
       //  异步获取第一页显示
-        this.getOrders(1)
+        this.getOrders()
     },
 
 

@@ -62,7 +62,7 @@ export const reqCheckCartItem = (skuId,isChecked) =>ajax.get(`/cart/checkCart/${
 删除购物车购物商品
 /api/cart/deleteCart/{skuId}
 */
-export const reqDeleteCartItem = (skuId)=>ajax.delete(`/cart/deleteCart/${skuId}`)
+export const  reqDeleteCartItem = (skuId)=>ajax.delete(`/cart/deleteCart/${skuId}`)
 
 
 /*
@@ -105,5 +105,49 @@ export const reqLogout = () =>ajax('/user/passport/logout')
 获取订单列表
 /api/order/auth/{page}/{limit}
 */
-
 export const reqOrders = (page,limit) => ajax(`/order/auth/${page}/${limit}`)
+
+
+/*
+10.获取订单交易页信息
+/api/order/auth/trade  GET
+*/
+export const reqTradeInfo = () =>ajax('/order/auth/trade')
+
+/*
+提交订单
+ 12./api/order/auth/submitOrder?tradeNo={tradeNo}
+
+tradeNo:交易号
+orderInfo:包含要提交的订单相关信息对象
+
+    {
+    "consignee": "admin",
+    "consigneeTel": "15011111111",
+    "deliveryAddress": "北京市昌平区2",
+    "paymentWay": "ONLINE",
+    "orderComment": "xxx",
+    "orderDetailList": []
+    }
+*/
+
+export const reqSubmitOrder = (tradeNo,orderInfo) =>ajax({
+      url:'/order/auth/submitOrder',
+      method:'POST',
+      // query:{tradeNo},
+      params:{tradeNo},   //指定query参数
+      data:orderInfo
+})
+
+/*
+13.获取订单支付信息
+/api/payment/weixin/createNative/{orderId}  GET
+*/
+export const reqPayInfo = (orderId) =>ajax(`/payment/weixin/createNative/${orderId}`)
+
+
+/*
+14.查询支付订单状态
+/api/payment/weixin/queryPayStatus/{orderId}  GET
+*/
+export const reqPayStatus = (orderId) =>ajax(`/payment/weixin/queryPayStatus/${orderId}`)

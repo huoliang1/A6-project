@@ -46,7 +46,7 @@
             <span class="sum">{{item.skuPrice * item.skuNum}}</span>
           </li>
           <li class="cart-list-con7">
-            <a href="#none" class="sindelet">删除</a>
+            <a href="javascript:" class="sindelet" @click="deleteCartItem(item)">删除</a>
             <br>
             <a href="#none">移到收藏</a>
           </li>
@@ -59,7 +59,7 @@
         <span>全选</span>
       </div>
       <div class="option">
-        <a href="#none">删除选中的商品</a>
+        <a href="javascript:" @click="deleteCheckedCartItems">删除选中的商品</a>
         <a href="#none">移到我的关注</a>
         <a href="#none">清除下柜商品</a>
       </div>
@@ -134,7 +134,7 @@ import {mapState, mapGetters} from 'vuex'
         修改商品数量
         最终的数量必须大于0,否则让其为原来的值
       */
-    async changeItemCount(item,numChange,event){
+      async changeItemCount(item,numChange,event){
 
           // 计算最终的数量，只有大于0才会去发请求
           const num =item.skuNum + numChange
@@ -158,9 +158,38 @@ import {mapState, mapGetters} from 'vuex'
               event.target.value = item.skuNum
             }
           }
+      },
 
-
-     }
+      /*
+      删除指定购物项
+      */
+           async deleteCartItem (item) {
+        if (window.confirm(`确定删除${item.skuName}吗?`)) {
+          try {
+            // 分发一个异步action
+            await this.$store.dispatch('deleteCartItem', item.skuId)
+            // 异步请求操作成功了
+            this.$store.dispatch('getCartList')
+          } catch (error) { // 异步请求操作失败了
+            alert(error.message)
+          }
+        }
+      },
+           /*
+      删除所有选中的购物项
+      */
+      async deleteCheckedCartItems() {
+        if (window.confirm(`确定删除吗?`)) {
+          try {
+            // 分发一个异步action
+            await this.$store.dispatch('deleteCheckedCartItems')
+            // 异步请求操作成功了
+            this.$store.dispatch('getCartList')
+          } catch (error) { // 异步请求操作失败了
+            alert(error.message)
+          }
+        }
+      },
 
 
 

@@ -92,11 +92,8 @@
                     </i>
                   </div>
                   <div class="operate">
-                    <a
-                      href="success-cart.html"
-                      target="_blank"
-                      class="sui-btn btn-bordered btn-danger"
-                    >加入购物车</a>
+                    <a class="sui-btn btn-bordered btn-danger"
+                    @click="addToCart(item)">加入购物车</a>
                     <a href="javascript:void(0);" class="sui-btn btn-bordered">收藏</a>
                   </div>
                 </div>
@@ -136,7 +133,8 @@ export default {
         order: "1:desc", // 排序方式  1: 综合,2: 价格 asc: 升序,desc: 降序  "1:desc"
         pageNo: 1, // 页码
         pageSize: 5 //	每页数量
-      }
+      },
+      skuNum:1,  //商品数量
     };
   },
   created() {
@@ -174,6 +172,32 @@ export default {
     this.updateOptions();
   },
   methods: {
+
+        /*
+          添加到购物车功能
+        */
+      async addToCart(item){
+          try{
+            // 分发异步action
+            await this.$store.dispatch('addToCart2',{skuId:item.id,skuNum:1})
+              // 成功后
+              // 根据当前商品的信息数据整理一个skuInfo对象
+              const skuInfo = {
+                  skuDefaultImg:item.defaultImg,
+                  skuName:item.title,
+                  id:item.id
+              }
+            // 将当前商品的一些信息保存到sessionStorage中
+            window.sessionStorage.setItem('SKU_INFO_KEY',JSON.stringify(skuInfo))
+            // 路由跳转，携带query 参数
+            this.$router.push({path:'/addcartSuccess',query:{skuNum:1}})
+          }catch(error){
+            alert(error.message)
+          }
+       },
+
+
+
 
         /*
           设置新的排序

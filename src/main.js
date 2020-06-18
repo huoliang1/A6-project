@@ -10,7 +10,8 @@ import Pagination from './components/pagination'
 import * as API from '@/api'
 
 import '@/mock/mockServer'  //引入加载
-import './validate'
+import './validate'    //引入表单效验模块
+import './elements'
 // 注册全局组件 (所有组件都能使用)
 Vue.component('TypeNav',TypeNav)
 Vue.component('Carousel',Carousel)

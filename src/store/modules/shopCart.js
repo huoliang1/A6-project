@@ -1,7 +1,7 @@
 /*
   管理购物车相关数据的vuex子模块
 */
-import {reqShopCart,reqaddToCart, reqCheckCartItem} from '@/api'
+import {reqShopCart,reqaddToCart, reqCheckCartItem,reqDeleteCartItem} from '@/api'
 const state = {
     cartList:[]  //购物车购物项列表啊
 }
@@ -83,11 +83,37 @@ const actions = {
             promises.push(promise)
           }
         })
-        //
+        //返回promise 对象
         return Promise.all(promises)
-   }
+   },
+    /*
+  删除一个购物项的异步action
+  */
+  async deleteCartItem (context, skuId) {
+    const result = await reqDeleteCartItem(skuId)
+    if (result.code!==200) { // 失败
+      throw new Error('删除购物项失败')   // async函数的promise就是失败的
+    }
+  },
 
+  /*
+  删除所有勾选的购物项的异步action
+  */
+  async deleteCheckedCartItems ({state, dispatch}) {
+
+    // 遍历每个勾选的购物项去分发deleteCartItem
+    const promises = state.cartList.reduce((pre, item) => {
+      if (item.isChecked===1) {
+        pre.push(dispatch('deleteCartItem', item.skuId))
+      }
+      return pre
+    }, [])
+
+    return Promise.all(promises)
+  }
 }
+
+
 const getters = {
     /*
     选中的总数量

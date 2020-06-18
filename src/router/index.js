@@ -74,8 +74,8 @@ VueRouter.prototype.replace = function(location,onComolete,onAbort){
                 if(token){
                   next()
                 }else{
-                  // 如果没有登录,强制跳转到login界面
-                  next('/login')
+                  // 如果没有登录,强制跳转到login界面 ，携带上目标路径的redirect query参数
+                  next('/login/?redirect=' + targetPath)
                 }
             }else{
               // 放行
