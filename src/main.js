@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import VueLazyload from 'vue-lazyload'
 import App from './App.vue'
 import router from './router'
 import store from './store'
@@ -12,6 +13,12 @@ import * as API from '@/api'
 import '@/mock/mockServer'  //引入加载
 import './validate'    //引入表单效验模块
 import './elements'
+//引入懒加载图片
+import loading from './assets/images/loaging.jpg'
+// 配置vue插件
+Vue.use(VueLazyload,{
+    loading,  //配置loading图片
+})
 // 注册全局组件 (所有组件都能使用)
 Vue.component('TypeNav',TypeNav)
 Vue.component('Carousel',Carousel)
